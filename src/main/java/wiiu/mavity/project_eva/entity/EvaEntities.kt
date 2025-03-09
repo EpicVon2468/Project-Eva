@@ -15,7 +15,7 @@ object EvaEntities {
         ProjectEva.LOGGER.info("Registering Entities for Project Eva!")
     }
 
-    val AT_FIELD_ID = Identifier(ProjectEva.MOD_ID, "at_field")
+    internal val AT_FIELD_ID = Identifier(ProjectEva.MOD_ID, "at_field")
 
     val AT_FIELD: EntityType<ATFieldEntity> = Registry.register(Registries.ENTITY_TYPE, AT_FIELD_ID,
         FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::ATFieldEntity)

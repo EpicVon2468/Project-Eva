@@ -1,5 +1,7 @@
 package wiiu.mavity.project_eva.entity.renderer
 
+import net.fabricmc.api.*
+
 import net.minecraft.client.render.*
 import net.minecraft.client.render.entity.*
 import net.minecraft.client.util.math.MatrixStack
@@ -9,9 +11,10 @@ import wiiu.mavity.project_eva.ProjectEva
 import wiiu.mavity.project_eva.entity.custom.ATFieldEntity
 import wiiu.mavity.project_eva.entity.model.ATFieldEntityModel
 
+@Environment(EnvType.CLIENT)
 class ATFieldEntityRenderer(ctx: EntityRendererFactory.Context) : EntityRenderer<ATFieldEntity>(ctx) {
 
-    private val entityModel: ATFieldEntityModel = ATFieldEntityModel(ctx.getPart(ATFieldEntityModel.LAYER_LOCATION));
+    private val entityModel: ATFieldEntityModel = ATFieldEntityModel(ctx.getPart(ATFieldEntityModel.LAYER_LOCATION))
 
     override fun render(entity: ATFieldEntity, yaw: Float, tickDelta: Float, matrices: MatrixStack, vertexConsumers: VertexConsumerProvider, light: Int) {
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light)

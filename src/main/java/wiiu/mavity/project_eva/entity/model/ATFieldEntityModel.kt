@@ -26,7 +26,7 @@ class ATFieldEntityModel(root: ModelPart) : EntityModel<ATFieldEntity>() {
 
         fun getTexturedModelData(): TexturedModelData {
             val modelData = ModelData()
-            val main = modelData.root.addChild(
+            modelData.root.addChild(
                 "main",
                 ModelPartBuilder.create()
                     .uv(0, 0)
