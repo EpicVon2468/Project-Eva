@@ -7,7 +7,6 @@
 	"authors": [
 		"Mavity The Madity"
 	],
-	"license": "",
 	"icon": "assets/project_eva/icon.png",
 	"environment": "*",
 	"entrypoints": {
