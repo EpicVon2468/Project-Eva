@@ -5,6 +5,7 @@ import net.fabricmc.api.*
 import net.minecraft.client.render.*
 import net.minecraft.client.render.entity.*
 import net.minecraft.client.util.math.MatrixStack
+import net.minecraft.util.math.RotationAxis
 import net.minecraft.util.Identifier
 
 import wiiu.mavity.project_eva.ProjectEva
@@ -19,7 +20,11 @@ class ATFieldEntityRenderer(ctx: EntityRendererFactory.Context) : EntityRenderer
     override fun render(entity: ATFieldEntity, yaw: Float, tickDelta: Float, matrices: MatrixStack, vertexConsumers: VertexConsumerProvider, light: Int) {
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light)
         val vertexConsumer = vertexConsumers.getBuffer(this.entityModel.getLayer(this.getTexture(entity)))
+        matrices.push()
+        matrices.scale(2.0f, 2.0f, 2.0f)
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-entity.yaw))
         this.entityModel.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f)
+        matrices.pop()
     }
 
     override fun getTexture(entity: ATFieldEntity): Identifier = Identifier(ProjectEva.MOD_ID, "textures/entity/at_field.png")
