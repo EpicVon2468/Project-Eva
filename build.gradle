@@ -11,7 +11,10 @@ base {
 	archivesName = project.archives_base_name
 }
 
-repositories {}
+repositories {
+	// ModMenu
+	maven { url = "https://maven.terraformersmc.com/releases/" }
+}
 
 dependencies {
 	// To change the versions see the gradle.properties file
@@ -21,6 +24,8 @@ dependencies {
 
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
+
+	modRuntimeOnly("com.terraformersmc:modmenu:${project.mod_menu_version}")
 }
 
 processResources {
