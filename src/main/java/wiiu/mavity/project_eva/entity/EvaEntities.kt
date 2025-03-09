@@ -19,7 +19,7 @@ object EvaEntities {
 
     val AT_FIELD: EntityType<ATFieldEntity> = Registry.register(Registries.ENTITY_TYPE, AT_FIELD_ID,
         FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::ATFieldEntity)
-            .dimensions(EntityDimensions.fixed(1f, 1f))
+            .dimensions(EntityDimensions.fixed(0.1f, 3.0f))
             .fireImmune()
             .trackRangeBlocks(5000)
             .spawnableFarFromPlayer()

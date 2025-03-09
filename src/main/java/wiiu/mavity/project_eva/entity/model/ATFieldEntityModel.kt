@@ -17,8 +17,12 @@ class ATFieldEntityModel(root: ModelPart) : EntityModel<ATFieldEntity>() {
 
     override fun setAngles(entity: ATFieldEntity, limbSwing: Float, limbSwingAmount: Float, ageInTicks: Float, netHeadYaw: Float, headPitch: Float) = Unit
 
-    override fun render(matrices: MatrixStack, vertexConsumer: VertexConsumer, light: Int, overlay: Int, red: Float, green: Float, blue: Float, alpha: Float) =
+    override fun render(matrices: MatrixStack, vertexConsumer: VertexConsumer, light: Int, overlay: Int, red: Float, green: Float, blue: Float, alpha: Float) {
+        matrices.push()
+        matrices.scale(2.0f, 2.0f, 2.0f)
         main.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha)
+        matrices.pop()
+    }
 
     companion object {
 
