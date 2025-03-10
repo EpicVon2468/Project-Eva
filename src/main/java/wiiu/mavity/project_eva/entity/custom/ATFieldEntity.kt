@@ -27,12 +27,17 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
         val x = this.x
         val y = this.y
         val z = this.z
-        val width = this.width + 3.0f
-        val height = this.height + 3.0f
+        val width = (this.width + 3.0f) * AT_FIELD_SIZE_MODIFIER
+        val height = (this.height + 3.0f) * AT_FIELD_SIZE_MODIFIER
         return when (this.horizontalFacing) {
             Direction.SOUTH, Direction.NORTH -> Box(x - width, y, z, x + width, y + height, z)
             Direction.WEST, Direction.EAST -> Box(x, y, z - width, x, y + height, z + width)
             else -> Box(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
         }
+    }
+
+    companion object {
+
+        const val AT_FIELD_SIZE_MODIFIER = 2.0f
     }
 }

@@ -21,7 +21,7 @@ class ATFieldEntityRenderer(ctx: EntityRendererFactory.Context) : EntityRenderer
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light)
         val vertexConsumer = vertexConsumers.getBuffer(this.entityModel.getLayer(this.getTexture(entity)))
         matrices.push()
-        matrices.scale(2.0f, 2.0f, 2.0f)
+        matrices.scale(2.0f * ATFieldEntity.AT_FIELD_SIZE_MODIFIER, 2.0f * ATFieldEntity.AT_FIELD_SIZE_MODIFIER, 2.0f * ATFieldEntity.AT_FIELD_SIZE_MODIFIER)
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-entity.yaw))
         this.entityModel.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f)
         matrices.pop()
