@@ -3,7 +3,8 @@
 	"package": "wiiu.mavity.project_eva.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"ExampleMixin"
+		"ATFieldOwnerImpl",
+		"ExplosionMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

@@ -1,3 +1,8 @@
 {
-  "entity.project_eva.at_field": "AT Field"
+
+  "entity.project_eva.at_field": "AT Field",
+
+  "item.project_eva.spear_longinus": "Spear of Longinus",
+  "item.project_eva.spear_cassius": "Spear of Cassius"
+
 }

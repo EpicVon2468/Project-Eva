@@ -2,6 +2,7 @@ package wiiu.mavity.project_eva.entity.custom
 
 import net.minecraft.entity.*
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.*
 import net.minecraft.world.World
@@ -9,15 +10,32 @@ import net.minecraft.world.World
 import wiiu.mavity.project_eva.ProjectEva
 import wiiu.mavity.project_eva.entity.ProjectEvaEntities
 
-class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : Entity(entityType, world) {
+import java.util.UUID
+
+class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : Entity(entityType, world), Ownable, ATFieldOwner {
 
     constructor(world: World) : this(ProjectEvaEntities.AT_FIELD, world)
 
+    constructor(world: World, owner: ATFieldOwner) : this(ProjectEvaEntities.AT_FIELD, world) {
+        this.owner = owner
+    }
+
+    @get:JvmName("owner") // Default name conflicts with the getter method from the Ownable interface
+    var owner: ATFieldOwner? = null
+        set(value) {
+            field = value
+            this.ownerUUID = value?.asEntity()?.uuid
+        }
+
+    var ownerUUID: UUID? = null
+
+    override fun getOwner(): Entity? = this.owner?.asEntity()
+
     override fun initDataTracker() {}
 
-    override fun readCustomDataFromNbt(nbt: NbtCompound) {}
+    override fun readCustomDataFromNbt(nbt: NbtCompound) = if (nbt.contains(KEY)) this.owner = (this.world as ServerWorld).getEntity(nbt.getUuid(KEY)) else Unit
 
-    override fun writeCustomDataToNbt(nbt: NbtCompound) {}
+    override fun writeCustomDataToNbt(nbt: NbtCompound) = if (this.ownerUUID != null) nbt.putUuid(KEY, this.ownerUUID) else Unit
 
     override fun canBeHitByProjectile(): Boolean = true
 
@@ -36,6 +54,8 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
 
     override fun hasNoGravity(): Boolean = true
 
+    override fun isImmuneToExplosion(): Boolean = true
+
     override fun calculateBoundingBox(): Box {
         val x = this.x
         val y = this.y
@@ -49,9 +69,18 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
         }
     }
 
+    // Kotlin breaks with interface injection. We have to implement these manually.
+
+    override var ATField: ATFieldEntity?
+        get() = null
+        set(value) {}
+
+    override fun asEntity(): Entity = this
+
     companion object {
 
         val AT_FIELD_ID = Identifier(ProjectEva.MOD_ID, "at_field")
         const val AT_FIELD_SIZE_MODIFIER = 2.0f
+        const val KEY = "OwnerUUID"
     }
 }

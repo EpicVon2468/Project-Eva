@@ -30,6 +30,14 @@
 		"fabricloader": "*",
 		"minecraft": "~1.20.1",
 		"java": ">=17",
-		"fabric-api": "*"
+		"fabric-api": "*",
+		"fabric-language-kotlin": "*"
+	},
+	"custom": {
+		"loom:injected_interfaces": {
+			"net/minecraft/class_1297": [
+				"wiiu/mavity/project_eva/entity/custom/ATFieldOwner"
+			]
+		}
 	}
 }
