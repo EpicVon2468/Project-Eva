@@ -4,13 +4,13 @@ import net.fabricmc.api.ModInitializer
 
 import org.slf4j.*
 
-import wiiu.mavity.project_eva.entity.EvaEntities
+import wiiu.mavity.project_eva.entity.ProjectEvaEntities
 
 object ProjectEva : ModInitializer {
 
     override fun onInitialize() {
         LOGGER.info("ProjectEva initializing!")
-        EvaEntities
+        ProjectEvaEntities
     }
 
     const val MOD_ID: String = "project_eva"

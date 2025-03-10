@@ -7,7 +7,6 @@ import net.minecraft.client.render.VertexConsumer
 import net.minecraft.client.render.entity.model.*
 import net.minecraft.client.util.math.MatrixStack
 
-import wiiu.mavity.project_eva.entity.EvaEntities
 import wiiu.mavity.project_eva.entity.custom.ATFieldEntity
 
 @Environment(EnvType.CLIENT)
@@ -22,7 +21,7 @@ class ATFieldEntityModel(root: ModelPart) : EntityModel<ATFieldEntity>() {
 
     companion object {
 
-        val LAYER_LOCATION: EntityModelLayer = EntityModelLayer(EvaEntities.AT_FIELD_ID, "main")
+        val LAYER_LOCATION: EntityModelLayer = EntityModelLayer(ATFieldEntity.AT_FIELD_ID, "main")
 
         fun getTexturedModelData(): TexturedModelData {
             val modelData = ModelData()

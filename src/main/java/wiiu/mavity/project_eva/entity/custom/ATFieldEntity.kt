@@ -2,14 +2,16 @@ package wiiu.mavity.project_eva.entity.custom
 
 import net.minecraft.entity.*
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.util.Identifier
 import net.minecraft.util.math.*
 import net.minecraft.world.World
 
-import wiiu.mavity.project_eva.entity.EvaEntities
+import wiiu.mavity.project_eva.ProjectEva
+import wiiu.mavity.project_eva.entity.ProjectEvaEntities
 
 class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : Entity(entityType, world) {
 
-    constructor(world: World) : this(EvaEntities.AT_FIELD, world)
+    constructor(world: World) : this(ProjectEvaEntities.AT_FIELD, world)
 
     override fun initDataTracker() {}
 
@@ -38,6 +40,7 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
 
     companion object {
 
+        val AT_FIELD_ID = Identifier(ProjectEva.MOD_ID, "at_field")
         const val AT_FIELD_SIZE_MODIFIER = 2.0f
     }
 }
