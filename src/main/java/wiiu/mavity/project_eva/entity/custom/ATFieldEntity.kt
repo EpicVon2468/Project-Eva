@@ -12,7 +12,8 @@ import wiiu.mavity.project_eva.entity.ProjectEvaEntities
 
 import java.util.UUID
 
-class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : Entity(entityType, world), Ownable, ATFieldOwner {
+// TODO: Stop players from being able to get projectiles through if they are pushed directly against an AT Field.
+class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : Entity(entityType, world), Ownable {
 
     constructor(world: World) : this(ProjectEvaEntities.AT_FIELD, world)
 
@@ -68,14 +69,6 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
             else -> Box(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
         }
     }
-
-    // Kotlin breaks with interface injection. We have to implement these manually.
-
-    override var ATField: ATFieldEntity?
-        get() = null
-        set(value) {}
-
-    override fun asEntity(): Entity = this
 
     companion object {
 

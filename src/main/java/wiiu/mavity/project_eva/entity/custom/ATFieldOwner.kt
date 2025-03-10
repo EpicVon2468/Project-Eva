@@ -5,6 +5,8 @@ import net.minecraft.entity.Entity
 interface ATFieldOwner {
 
     var ATField: ATFieldEntity?
+        get() = TODO()
+        set(value) = TODO()
 
-    fun asEntity(): Entity
+    fun asEntity(): Entity = TODO()
 }
