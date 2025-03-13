@@ -14,9 +14,10 @@ class BaseSpear : TridentItem(Settings()) {
     override fun onStoppedUsing(stack: ItemStack, world: World, user: LivingEntity, remainingUseTicks: Int) {
         if (user !is PlayerEntity) return
         if (!world.isClient) {
+            val isCreative = user.abilities.creativeMode
             val tridentEntity = TridentEntity(world, user, stack)
-            tridentEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 3.0f, 0.0f)
-            if (user.abilities.creativeMode) tridentEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY
+            tridentEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 10.0f, 0.0f)
+            if (isCreative) tridentEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY
             world.spawnEntity(tridentEntity)
             world.playSoundFromEntity(
                 null,
@@ -26,7 +27,7 @@ class BaseSpear : TridentItem(Settings()) {
                 1.0f,
                 1.0f
             )
-            if (!user.abilities.creativeMode) user.inventory.removeOne(stack)
+            if (!isCreative) user.inventory.removeOne(stack)
             user.incrementStat(Stats.USED.getOrCreateStat(this))
         }
     }
