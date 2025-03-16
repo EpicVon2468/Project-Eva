@@ -9,11 +9,15 @@ import net.minecraft.world.World
 
 import wiiu.mavity.project_eva.ProjectEva
 import wiiu.mavity.project_eva.entity.ProjectEvaEntities
+import wiiu.mavity.project_eva.util.expand
+import wiiu.mavity.project_eva.util.thisOrOppositeEquals
 
 import java.util.UUID
 
 // TODO: Stop players from being able to get projectiles through if they are pushed directly against an AT Field.
 class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : Entity(entityType, world), Ownable {
+
+    var sizeModifier = 2.0f
 
     constructor(world: World) : this(ProjectEvaEntities.AT_FIELD, world)
 
@@ -30,11 +34,30 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
 
     var ownerUUID: UUID? = null
 
+    // TODO: Fix me
+    override fun tick() {
+        super.tick()
+        if (this.world.isClient) return
+        val others = this.world()
+            .getOtherEntities(this, this.boundingBox.expand(this.horizontalFacing, 1.5 * this.sizeModifier, true)) { it != this }
+        if (others.isEmpty()) return
+        println("Found others: $others")
+        for (other in others) {
+            if (other !is ATFieldEntity) continue
+            if (other.horizontalFacing thisOrOppositeEquals this.horizontalFacing) continue
+            if (other.ownerUUID == this.ownerUUID && this.ownerUUID != null) continue
+            other.discard()
+            this.discard()
+        }
+    }
+
+    private fun world(): ServerWorld = this.world as ServerWorld
+
     override fun getOwner(): Entity? = this.owner?.asEntity()
 
     override fun initDataTracker() {}
 
-    override fun readCustomDataFromNbt(nbt: NbtCompound) = if (nbt.contains(KEY)) this.owner = (this.world as ServerWorld).getEntity(nbt.getUuid(KEY)) else Unit
+    override fun readCustomDataFromNbt(nbt: NbtCompound) = if (nbt.contains(KEY)) this.owner = this.world().getEntity(nbt.getUuid(KEY)) else Unit
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) = if (this.ownerUUID != null) nbt.putUuid(KEY, this.ownerUUID) else Unit
 
@@ -44,10 +67,7 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
 
     override fun isCollidable(): Boolean = true
 
-    override fun collidesWith(other: Entity): Boolean {
-        // We can implement logic for if the other is an AT Field entity here :O
-        return true
-    }
+    override fun collidesWith(other: Entity): Boolean = true
 
     override fun canUsePortals(): Boolean = false
 
@@ -61,8 +81,8 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
         val x = this.x
         val y = this.y
         val z = this.z
-        val width = (this.width + 3.0f) * AT_FIELD_SIZE_MODIFIER
-        val height = (this.height + 3.0f) * AT_FIELD_SIZE_MODIFIER
+        val width = (this.width + 3.0f) * this.sizeModifier
+        val height = (this.height + 3.0f) * this.sizeModifier
         return when (this.horizontalFacing) {
             Direction.SOUTH, Direction.NORTH -> Box(x - width, y, z, x + width, y + height, z).expand(0.0, 0.0, 0.1)
             Direction.WEST, Direction.EAST -> Box(x, y, z - width, x, y + height, z + width).expand(0.1, 0.0, 0.0)
@@ -73,7 +93,6 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
     companion object {
 
         val AT_FIELD_ID = Identifier(ProjectEva.MOD_ID, "at_field")
-        const val AT_FIELD_SIZE_MODIFIER = 2.0f
         const val KEY = "OwnerUUID"
     }
 }
