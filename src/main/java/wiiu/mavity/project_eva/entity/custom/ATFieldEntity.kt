@@ -3,6 +3,7 @@ package wiiu.mavity.project_eva.entity.custom
 import net.minecraft.entity.*
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.*
 import net.minecraft.world.World
@@ -39,9 +40,9 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
         super.tick()
         if (this.world.isClient) return
         val others = this.world()
-            .getOtherEntities(this, this.boundingBox.expand(this.horizontalFacing, 1.5 * this.sizeModifier, true)) { it != this }
+            .getOtherEntities(this, this.boundingBox.expand(this.horizontalFacing, 3.5 * this.sizeModifier, true)) { it != this }
         if (others.isEmpty()) return
-        println("Found others: $others")
+        world.players.forEach { it.sendMessage(Text.literal("Found others: $others")) }
         for (other in others) {
             if (other !is ATFieldEntity) continue
             if (other.horizontalFacing thisOrOppositeEquals this.horizontalFacing) continue
