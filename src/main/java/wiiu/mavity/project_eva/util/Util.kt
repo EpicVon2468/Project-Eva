@@ -2,8 +2,8 @@ package wiiu.mavity.project_eva.util
 
 import net.minecraft.util.math.*
 
-fun Box.expand(direction: Direction, pAmount: Number, bothWays: Boolean = false): Box {
-    val amount = pAmount.toDouble()
+fun Box.expand(direction: Direction, by: Number, bothWays: Boolean = false): Box {
+    val amount = by.toDouble()
     return if (bothWays) when (direction) {
         Direction.NORTH, Direction.SOUTH -> this.offset(0.0, 0.0, amount)
         Direction.EAST, Direction.WEST -> this.offset(amount, 0.0, 0.0)

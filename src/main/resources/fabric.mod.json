@@ -37,6 +37,9 @@
 		"loom:injected_interfaces": {
 			"net/minecraft/class_1297": [
 				"wiiu/mavity/project_eva/entity/custom/ATFieldOwner"
+			],
+			"net/minecraft/class_1657": [
+				"wiiu/mavity/project_eva/entity/custom/BornOfLilith"
 			]
 		}
 	}

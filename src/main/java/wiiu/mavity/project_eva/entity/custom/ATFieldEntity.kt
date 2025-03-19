@@ -42,7 +42,7 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
         val others = this.world()
             .getOtherEntities(this, this.boundingBox.expand(this.horizontalFacing, 3.5 * this.sizeModifier, true)) { it != this }
         if (others.isEmpty()) return
-        world.players.forEach { it.sendMessage(Text.literal("Found others: $others")) }
+        this.world.players.forEach { it.sendMessage(Text.literal("Found others: $others")) }
         for (other in others) {
             if (other !is ATFieldEntity) continue
             if (other.horizontalFacing thisOrOppositeEquals this.horizontalFacing) continue
