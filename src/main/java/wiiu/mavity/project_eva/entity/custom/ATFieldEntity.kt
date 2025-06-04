@@ -8,6 +8,7 @@ import net.minecraft.util.math.*
 import net.minecraft.world.World
 
 import wiiu.mavity.project_eva.ProjectEva
+import wiiu.mavity.project_eva.util.plus
 import wiiu.mavity.project_eva.entity.ProjectEvaEntities
 
 import java.util.UUID
@@ -36,14 +37,15 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
     override fun tick() {
         super.tick()
         if (this.world.isClient) return
-        val others = this.world()
-            .getOtherEntities(this, this.boundingBox.expand(1.5 * this.sizeModifier)) { it != this && !it.isSpectator }
+        val others = this.world().getOtherEntities(this, this.boundingBox + 1.5 * this.sizeModifier) {
+            it != this && !it.isSpectator
+        }
         if (others.isEmpty()) return
         for (other in others) {
             if (other !is ATFieldEntity) continue
             if (other.ownerUUID == this.ownerUUID && this.ownerUUID != null) continue
-            other.discard()
             this.discard()
+            other.discard()
         }
     }
 
@@ -53,7 +55,7 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
 
     override fun initDataTracker() {}
 
-    override fun readCustomDataFromNbt(nbt: NbtCompound) = if (nbt.contains(KEY)) this.owner = this.world().getEntity(nbt.getUuid(KEY)) else Unit
+    override fun readCustomDataFromNbt(nbt: NbtCompound) = if (KEY in nbt) this.owner = this.world().getEntity(nbt.getUuid(KEY)) else Unit
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) = if (this.ownerUUID != null) nbt.putUuid(KEY, this.ownerUUID) else Unit
 

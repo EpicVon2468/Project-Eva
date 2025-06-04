@@ -18,4 +18,6 @@ fun Box.expand(direction: Direction, by: Number = 1, bothWays: Boolean = false):
     }
 }
 
+operator fun Box.plus(value: Double): Box = this.expand(value)
+
 infix fun Direction.thisOrOppositeEquals(other: Direction): Boolean = this == other || this.opposite == other
