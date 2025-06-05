@@ -10,7 +10,7 @@ import wiiu.mavity.project_eva.item.ProjectEvaItems
 object ProjectEva : ModInitializer {
 
     override fun onInitialize() {
-        LOGGER.info("ProjectEva initializing!")
+        LOGGER.info("ProjectEva initialising!")
         ProjectEvaEntities
         ProjectEvaItems
     }
