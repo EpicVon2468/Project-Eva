@@ -1,0 +1,4 @@
+accessWidener v2 named
+
+accessible field net/minecraft/entity/Entity firstUpdate Z
+accessible field net/minecraft/entity/projectile/TridentEntity tridentStack Lnet/minecraft/item/ItemStack;

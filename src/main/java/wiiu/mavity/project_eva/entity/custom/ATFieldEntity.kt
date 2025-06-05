@@ -1,6 +1,7 @@
 package wiiu.mavity.project_eva.entity.custom
 
 import net.minecraft.entity.*
+import net.minecraft.entity.projectile.*
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.Identifier
@@ -10,6 +11,7 @@ import net.minecraft.world.World
 import wiiu.mavity.project_eva.ProjectEva
 import wiiu.mavity.project_eva.util.plus
 import wiiu.mavity.project_eva.entity.ProjectEvaEntities
+import wiiu.mavity.project_eva.item.custom.BaseSpear
 
 import java.util.UUID
 
@@ -42,7 +44,10 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
 		}
 		if (others.isEmpty()) return
 		for (other in others) {
-			if (other !is ATFieldEntity) continue
+			if (other !is ATFieldEntity) {
+				if (other.firstUpdate && (other is ProjectileEntity || (other is TridentEntity && other.tridentStack.item !is BaseSpear))) other.discard()
+				continue
+			}
 			if (other.ownerUUID == this.ownerUUID && this.ownerUUID != null) continue
 			this.discard()
 			other.discard()

@@ -11,6 +11,10 @@ base {
 	archivesName = project.archives_base_name
 }
 
+loom {
+	accessWidenerPath = file("src/main/resources/${archives_base_name}.accesswidener")
+}
+
 repositories {
 	// ModMenu
 	maven { url = "https://maven.terraformersmc.com/releases/" }

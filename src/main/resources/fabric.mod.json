@@ -26,6 +26,7 @@
 	"mixins": [
 		"project_eva.mixins.json"
 	],
+	"accessWidener": "project_eva.accesswidener",
 	"depends": {
 		"fabricloader": "*",
 		"minecraft": "~1.20.1",

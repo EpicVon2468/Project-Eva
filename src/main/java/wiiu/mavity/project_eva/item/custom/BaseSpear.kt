@@ -16,7 +16,7 @@ class BaseSpear : TridentItem(Settings()) {
         if (!world.isClient) {
             val isCreative = user.abilities.creativeMode
             val tridentEntity = TridentEntity(world, user, stack)
-            tridentEntity.setVelocity(user, user.pitch, user.yaw, 0.0f, 10.0f, 0.0f)
+            tridentEntity.setVelocity(user, user.pitch, user.yaw, 0.0f, 5.0f, 0.0f)
             if (isCreative) tridentEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY
             world.spawnEntity(tridentEntity)
             world.playSoundFromEntity(
