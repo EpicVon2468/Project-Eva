@@ -45,7 +45,11 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
 		if (others.isEmpty()) return
 		for (other in others) {
 			if (other !is ATFieldEntity) {
-				if (other.firstUpdate && (other is ProjectileEntity || (other is TridentEntity && other.tridentStack.item !is BaseSpear))) other.discard()
+				if (other is ProjectileEntity) {
+					val item = ((other as? TridentEntity)?.tridentStack?.item as? BaseSpear)
+					if (item !is BaseSpear && other.firstUpdate) other.discard()
+					else item?.let { this.discard() }
+				}
 				continue
 			}
 			if (other.ownerUUID == this.ownerUUID && this.ownerUUID != null) continue
