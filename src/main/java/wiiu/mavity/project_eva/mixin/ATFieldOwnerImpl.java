@@ -24,8 +24,28 @@ public class ATFieldOwnerImpl implements ATFieldOwner {
 
     @Override
     public void setATField(@Nullable ATFieldEntity atFieldEntity) {
+		this.handleNullableOwner(null);
         this.atFieldEntity = atFieldEntity;
+		this.handleNullableOwner(this);
     }
+
+	@Unique
+	private void handleNullableOwner(@Nullable ATFieldOwner newOwner) {
+		if (this.atFieldEntity != null) this.atFieldEntity.setOwner(newOwner);
+	}
+
+	@Unique
+	private int proportionalHealth = 20;
+
+	@Override
+	public int getProportionalHealth() {
+		return this.proportionalHealth;
+	}
+
+	@Override
+	public void setProportionalHealth(int value) {
+		this.proportionalHealth = value;
+	}
 
     @NotNull
     @Override

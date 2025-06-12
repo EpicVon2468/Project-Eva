@@ -15,10 +15,9 @@ import wiiu.mavity.project_eva.item.custom.BaseSpear
 
 import java.util.UUID
 
-// TODO: Stop players from being able to get projectiles through if they are pushed directly against an AT Field.
 class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : Entity(entityType, world), Ownable {
 
-	var sizeModifier = 2.0f
+	var sizeModifier: Float = 2.0f
 
 	constructor(world: World) : this(ProjectEvaEntities.AT_FIELD, world)
 
@@ -31,9 +30,12 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
 		set(value) {
 			field = value
 			this.ownerUUID = value?.asEntity()?.uuid
+			field?.proportionalHealth?.let { this.health = it }
 		}
 
 	var ownerUUID: UUID? = null
+
+	var health: Int = 20
 
 	// TODO: Fix me
 	override fun tick() {
