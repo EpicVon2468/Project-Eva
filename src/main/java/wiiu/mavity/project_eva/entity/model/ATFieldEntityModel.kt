@@ -27,10 +27,8 @@ class ATFieldEntityModel(root: ModelPart) : EntityModel<ATFieldEntity>() {
             val modelData = ModelData()
             modelData.root.addChild(
                 "main",
-                ModelPartBuilder.create()
-                    .uv(0, 0)
-                    .cuboid(-24.0f, 0.0f, 0.0f, 48.0f, 48.0f, 0.0f, Dilation(0.0f)),
-                ModelTransform.pivot(0.0f, 0.0f, 0.0f)
+                ModelPartBuilder.create().cuboid(-24.0f, 0.0f, 0.0f, 48.0f, 48.0f, 0.0f, Dilation.NONE),
+                ModelTransform.NONE
             )
             return TexturedModelData.of(modelData, 128, 128)
         }
