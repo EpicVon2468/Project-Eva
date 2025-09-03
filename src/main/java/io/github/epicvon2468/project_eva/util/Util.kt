@@ -1,4 +1,4 @@
-package wiiu.mavity.project_eva.util
+package io.github.epicvon2468.project_eva.util
 
 import net.minecraft.util.math.*
 

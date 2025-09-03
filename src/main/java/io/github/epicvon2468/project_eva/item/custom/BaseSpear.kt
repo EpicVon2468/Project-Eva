@@ -1,4 +1,4 @@
-package wiiu.mavity.project_eva.item.custom
+package io.github.epicvon2468.project_eva.item.custom
 
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity

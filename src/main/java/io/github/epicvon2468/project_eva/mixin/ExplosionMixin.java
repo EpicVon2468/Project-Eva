@@ -1,4 +1,4 @@
-package wiiu.mavity.project_eva.mixin;
+package io.github.epicvon2468.project_eva.mixin;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.world.explosion.Explosion;
@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import wiiu.mavity.project_eva.entity.custom.ATFieldEntity;
+import io.github.epicvon2468.project_eva.entity.custom.ATFieldEntity;
 
 import java.util.*;
 

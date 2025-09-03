@@ -1,11 +1,11 @@
-package wiiu.mavity.project_eva
+package io.github.epicvon2468.project_eva
 
 import net.fabricmc.api.ModInitializer
 
 import org.slf4j.*
 
-import wiiu.mavity.project_eva.entity.ProjectEvaEntities
-import wiiu.mavity.project_eva.item.ProjectEvaItems
+import io.github.epicvon2468.project_eva.entity.ProjectEvaEntities
+import io.github.epicvon2468.project_eva.item.ProjectEvaItems
 
 object ProjectEva : ModInitializer {
 

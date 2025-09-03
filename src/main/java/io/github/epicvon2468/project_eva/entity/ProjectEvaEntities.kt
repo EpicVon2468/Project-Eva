@@ -1,12 +1,12 @@
-package wiiu.mavity.project_eva.entity
+package io.github.epicvon2468.project_eva.entity
 
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
 
 import net.minecraft.entity.*
 import net.minecraft.registry.*
 
-import wiiu.mavity.project_eva.ProjectEva
-import wiiu.mavity.project_eva.entity.custom.ATFieldEntity
+import io.github.epicvon2468.project_eva.ProjectEva
+import io.github.epicvon2468.project_eva.entity.custom.ATFieldEntity
 
 object ProjectEvaEntities {
 

@@ -1,4 +1,4 @@
-package wiiu.mavity.project_eva.entity.custom
+package io.github.epicvon2468.project_eva.entity.custom
 
 import net.minecraft.entity.Entity
 

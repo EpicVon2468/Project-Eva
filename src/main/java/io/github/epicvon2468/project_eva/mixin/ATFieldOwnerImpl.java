@@ -1,4 +1,4 @@
-package wiiu.mavity.project_eva.mixin;
+package io.github.epicvon2468.project_eva.mixin;
 
 import net.minecraft.entity.Entity;
 
@@ -6,7 +6,7 @@ import org.jetbrains.annotations.*;
 
 import org.spongepowered.asm.mixin.*;
 
-import wiiu.mavity.project_eva.entity.custom.*;
+import io.github.epicvon2468.project_eva.entity.custom.*;
 
 @Mixin(Entity.class)
 @SuppressWarnings("AddedMixinMembersNamePattern")

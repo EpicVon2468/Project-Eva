@@ -13,13 +13,13 @@
 		"main": [
 			{
 				"adapter": "kotlin",
-				"value": "wiiu.mavity.project_eva.ProjectEva"
+				"value": "io.github.epicvon2468.project_eva.ProjectEva"
 			}
 		],
 		"client": [
 			{
 				"adapter": "kotlin",
-				"value": "wiiu.mavity.project_eva.ProjectEvaClient"
+				"value": "io.github.epicvon2468.project_eva.ProjectEvaClient"
 			}
 		]
 	},
@@ -37,10 +37,10 @@
 	"custom": {
 		"loom:injected_interfaces": {
 			"net/minecraft/class_1297": [
-				"wiiu/mavity/project_eva/entity/custom/ATFieldOwner"
+				"io/github/epicvon2468/project_eva/entity/custom/ATFieldOwner"
 			],
 			"net/minecraft/class_1657": [
-				"wiiu/mavity/project_eva/entity/custom/BornOfLilith"
+				"io/github/epicvon2468/project_eva/entity/custom/BornOfLilith"
 			]
 		}
 	}

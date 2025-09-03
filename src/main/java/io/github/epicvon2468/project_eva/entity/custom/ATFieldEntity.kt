@@ -1,4 +1,4 @@
-package wiiu.mavity.project_eva.entity.custom
+package io.github.epicvon2468.project_eva.entity.custom
 
 import net.minecraft.entity.*
 import net.minecraft.entity.projectile.*
@@ -8,10 +8,10 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.*
 import net.minecraft.world.World
 
-import wiiu.mavity.project_eva.ProjectEva
-import wiiu.mavity.project_eva.util.plus
-import wiiu.mavity.project_eva.entity.ProjectEvaEntities
-import wiiu.mavity.project_eva.item.custom.BaseSpear
+import io.github.epicvon2468.project_eva.ProjectEva
+import io.github.epicvon2468.project_eva.util.plus
+import io.github.epicvon2468.project_eva.entity.ProjectEvaEntities
+import io.github.epicvon2468.project_eva.item.custom.BaseSpear
 
 import java.util.UUID
 

@@ -1,11 +1,11 @@
-package wiiu.mavity.project_eva
+package io.github.epicvon2468.project_eva
 
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.rendering.v1.*
 
-import wiiu.mavity.project_eva.entity.ProjectEvaEntities
-import wiiu.mavity.project_eva.entity.model.ATFieldEntityModel
-import wiiu.mavity.project_eva.entity.renderer.ATFieldEntityRenderer
+import io.github.epicvon2468.project_eva.entity.ProjectEvaEntities
+import io.github.epicvon2468.project_eva.entity.model.ATFieldEntityModel
+import io.github.epicvon2468.project_eva.entity.renderer.ATFieldEntityRenderer
 
 object ProjectEvaClient : ClientModInitializer {
 

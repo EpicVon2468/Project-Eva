@@ -1,4 +1,4 @@
-package wiiu.mavity.project_eva.entity.model
+package io.github.epicvon2468.project_eva.entity.model
 
 import net.fabricmc.api.*
 
@@ -7,7 +7,7 @@ import net.minecraft.client.render.VertexConsumer
 import net.minecraft.client.render.entity.model.*
 import net.minecraft.client.util.math.MatrixStack
 
-import wiiu.mavity.project_eva.entity.custom.ATFieldEntity
+import io.github.epicvon2468.project_eva.entity.custom.ATFieldEntity
 
 @Environment(EnvType.CLIENT)
 class ATFieldEntityModel(root: ModelPart) : EntityModel<ATFieldEntity>() {

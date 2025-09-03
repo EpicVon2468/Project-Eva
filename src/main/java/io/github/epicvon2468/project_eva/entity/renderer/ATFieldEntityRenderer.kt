@@ -1,4 +1,4 @@
-package wiiu.mavity.project_eva.entity.renderer
+package io.github.epicvon2468.project_eva.entity.renderer
 
 import net.fabricmc.api.*
 
@@ -8,9 +8,9 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.RotationAxis
 import net.minecraft.util.Identifier
 
-import wiiu.mavity.project_eva.ProjectEva
-import wiiu.mavity.project_eva.entity.custom.ATFieldEntity
-import wiiu.mavity.project_eva.entity.model.ATFieldEntityModel
+import io.github.epicvon2468.project_eva.ProjectEva
+import io.github.epicvon2468.project_eva.entity.custom.ATFieldEntity
+import io.github.epicvon2468.project_eva.entity.model.ATFieldEntityModel
 
 @Environment(EnvType.CLIENT)
 class ATFieldEntityRenderer(ctx: EntityRendererFactory.Context) : EntityRenderer<ATFieldEntity>(ctx) {
