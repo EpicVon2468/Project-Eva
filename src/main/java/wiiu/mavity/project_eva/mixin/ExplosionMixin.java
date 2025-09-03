@@ -21,11 +21,11 @@ public class ExplosionMixin {
 	public List<Entity> protectedEntities = new ArrayList<>();
 
 	@ModifyReturnValue(
-			at = @At(
-					value = "INVOKE",
-					target = "Lnet/minecraft/entity/Entity;isImmuneToExplosion()Z"
-			),
-			method = "collectBlocksAndDamageEntities"
+		at = @At(
+			value = "INVOKE",
+			target = "Lnet/minecraft/entity/Entity;isImmuneToExplosion()Z"
+		),
+		method = "collectBlocksAndDamageEntities"
 	)
 	public boolean protectATFieldOwners(boolean original, @Local Entity entity) {
 		if (entity instanceof ATFieldEntity atFieldEntity) this.protectedEntities.add(atFieldEntity.getOwner());
@@ -34,8 +34,8 @@ public class ExplosionMixin {
 	}
 
 	@Inject(
-			at = @At("RETURN"),
-			method = "collectBlocksAndDamageEntities"
+		at = @At("RETURN"),
+		method = "collectBlocksAndDamageEntities"
 	)
 	public void clearList(CallbackInfo ci) {
 		this.protectedEntities.clear();

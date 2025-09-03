@@ -1,7 +1,7 @@
 plugins {
 	id 'fabric-loom' version '1.10-SNAPSHOT'
 	id 'maven-publish'
-	id "org.jetbrains.kotlin.jvm" version "2.1.10"
+	id "org.jetbrains.kotlin.jvm" version "2.2.10"
 }
 
 version = project.mod_version
@@ -18,7 +18,7 @@ loom {
 repositories {
 	// ModMenu
 	maven { url = "https://maven.terraformersmc.com/releases/" }
-	maven {url = "https://api.modrinth.com/maven" }
+	maven { url = "https://api.modrinth.com/maven" }
 }
 
 dependencies {
@@ -47,9 +47,12 @@ tasks.withType(JavaCompile).configureEach {
 	it.options.release = 17
 }
 
-compileKotlin {
-	kotlinOptions {
-		jvmTarget = "17"
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
+
+tasks.withType(KotlinJvmCompile).configureEach {
+	compilerOptions {
+		jvmTarget.set(JvmTarget.JVM_17)
 	}
 }
 

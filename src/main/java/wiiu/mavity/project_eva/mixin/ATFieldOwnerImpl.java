@@ -12,22 +12,22 @@ import wiiu.mavity.project_eva.entity.custom.*;
 @SuppressWarnings("AddedMixinMembersNamePattern")
 public class ATFieldOwnerImpl implements ATFieldOwner {
 
-    @Unique
-    @Nullable
-    private ATFieldEntity atFieldEntity;
+	@Unique
+	@Nullable
+	private ATFieldEntity atFieldEntity;
 
-    @Nullable
-    @Override
-    public ATFieldEntity getATField() {
-        return this.atFieldEntity;
-    }
+	@Nullable
+	@Override
+	public ATFieldEntity getATField() {
+		return this.atFieldEntity;
+	}
 
-    @Override
-    public void setATField(@Nullable ATFieldEntity atFieldEntity) {
+	@Override
+	public void setATField(@Nullable ATFieldEntity atFieldEntity) {
 		this.handleNullableOwner(null);
-        this.atFieldEntity = atFieldEntity;
+		this.atFieldEntity = atFieldEntity;
 		this.handleNullableOwner(this);
-    }
+	}
 
 	@Unique
 	private void handleNullableOwner(@Nullable ATFieldOwner newOwner) {
@@ -47,9 +47,9 @@ public class ATFieldOwnerImpl implements ATFieldOwner {
 		this.proportionalHealth = value;
 	}
 
-    @NotNull
-    @Override
-    public Entity asEntity() {
-        return (Entity) (Object) this;
-    }
+	@NotNull
+	@Override
+	public Entity asEntity() {
+		return (Entity) (Object) this;
+	}
 }

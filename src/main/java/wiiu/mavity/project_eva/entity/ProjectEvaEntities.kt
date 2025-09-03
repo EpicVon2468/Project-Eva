@@ -10,16 +10,16 @@ import wiiu.mavity.project_eva.entity.custom.ATFieldEntity
 
 object ProjectEvaEntities {
 
-    init {
-        ProjectEva.LOGGER.info("Registering Entities for Project Eva!")
-    }
+	init {
+		ProjectEva.LOGGER.info("Registering Entities for Project Eva!")
+	}
 
-    val AT_FIELD: EntityType<ATFieldEntity> = Registry.register(Registries.ENTITY_TYPE, ATFieldEntity.AT_FIELD_ID,
-        FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::ATFieldEntity)
-            .dimensions(EntityDimensions.fixed(0.1f, 3.0f))
-            .fireImmune()
-            .trackRangeBlocks(5000)
-            .spawnableFarFromPlayer()
-            .build()
-    )
+	val AT_FIELD: EntityType<ATFieldEntity> = Registry.register(Registries.ENTITY_TYPE, ATFieldEntity.AT_FIELD_ID,
+		FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::ATFieldEntity)
+			.dimensions(EntityDimensions.fixed(0.1f, 3.0f))
+			.fireImmune()
+			.trackRangeBlocks(5000)
+			.spawnableFarFromPlayer()
+			.build()
+	)
 }

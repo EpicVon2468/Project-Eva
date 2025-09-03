@@ -9,8 +9,8 @@ import wiiu.mavity.project_eva.entity.renderer.ATFieldEntityRenderer
 
 object ProjectEvaClient : ClientModInitializer {
 
-    override fun onInitializeClient() {
-        EntityModelLayerRegistry.registerModelLayer(ATFieldEntityModel.LAYER_LOCATION, ATFieldEntityModel::getTexturedModelData)
-        EntityRendererRegistry.register(ProjectEvaEntities.AT_FIELD, ::ATFieldEntityRenderer)
-    }
+	override fun onInitializeClient() {
+		EntityModelLayerRegistry.registerModelLayer(ATFieldEntityModel.LAYER_LOCATION, ATFieldEntityModel::getTexturedModelData)
+		EntityRendererRegistry.register(ProjectEvaEntities.AT_FIELD, ::ATFieldEntityRenderer)
+	}
 }

@@ -9,13 +9,15 @@ import wiiu.mavity.project_eva.item.ProjectEvaItems
 
 object ProjectEva : ModInitializer {
 
-    override fun onInitialize() {
-        LOGGER.info("ProjectEva initialising!")
-        ProjectEvaEntities
-        ProjectEvaItems
-    }
+	@Suppress("UnusedExpression") // Silence. We're calling the initialiser.
+	override fun onInitialize() {
+		LOGGER.info("ProjectEva initialising!")
+		ProjectEvaEntities
+		ProjectEvaItems
+	}
 
-    const val MOD_ID: String = "project_eva"
+	const val MOD_ID: String = "project_eva"
 
-    val LOGGER: Logger = LoggerFactory.getLogger(MOD_ID)
+	@JvmField
+	val LOGGER: Logger = LoggerFactory.getLogger(MOD_ID)
 }

@@ -11,8 +11,8 @@ import net.minecraft.world.World
 
 class BaseSpear : TridentItem(Settings()) {
 
-    override fun onStoppedUsing(stack: ItemStack, world: World, user: LivingEntity, remainingUseTicks: Int) {
-        if (user !is PlayerEntity || world.isClient) return
+	override fun onStoppedUsing(stack: ItemStack, world: World, user: LivingEntity, remainingUseTicks: Int) {
+		if (user !is PlayerEntity || world.isClient) return
 		val isCreative = user.abilities.creativeMode
 		val tridentEntity = TridentEntity(world, user, stack)
 		tridentEntity.setVelocity(user, user.pitch, user.yaw, 0.0f, 5.0f, 0.0f)
@@ -30,12 +30,12 @@ class BaseSpear : TridentItem(Settings()) {
 		user.incrementStat(Stats.USED.getOrCreateStat(this))
 	}
 
-    override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
-        user.setCurrentHand(hand)
-        return TypedActionResult.consume(user.mainHandStack)
-    }
+	override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
+		user.setCurrentHand(hand)
+		return TypedActionResult.consume(user.mainHandStack)
+	}
 
-    override fun getEnchantability(): Int = 0
+	override fun getEnchantability(): Int = 0
 
-    override fun getMaxUseTime(stack: ItemStack): Int = Int.MAX_VALUE
+	override fun getMaxUseTime(stack: ItemStack): Int = Int.MAX_VALUE
 }
