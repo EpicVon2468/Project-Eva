@@ -36,6 +36,7 @@ class ATFieldEntityModel(root: ModelPart) : EntityModel<ATFieldEntity>() {
 
 	companion object {
 
+		@JvmField
 		val LAYER_LOCATION: EntityModelLayer = EntityModelLayer(ATFieldEntity.AT_FIELD_ID, "main")
 
 		fun getTexturedModelData(): TexturedModelData {

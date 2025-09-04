@@ -14,6 +14,7 @@ object ProjectEvaEntities {
 		ProjectEva.LOGGER.info("Registering Entities for Project Eva!")
 	}
 
+	@JvmField
 	val AT_FIELD: EntityType<ATFieldEntity> = Registry.register(Registries.ENTITY_TYPE, ATFieldEntity.AT_FIELD_ID,
 		FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::ATFieldEntity)
 			.dimensions(EntityDimensions.fixed(0.1f, 3.0f))

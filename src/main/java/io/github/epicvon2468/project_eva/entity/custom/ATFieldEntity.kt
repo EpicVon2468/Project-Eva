@@ -1,6 +1,7 @@
 package io.github.epicvon2468.project_eva.entity.custom
 
 import net.minecraft.entity.*
+import net.minecraft.entity.data.*
 import net.minecraft.entity.projectile.*
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.server.world.ServerWorld
@@ -17,6 +18,7 @@ import java.util.UUID
 
 class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : Entity(entityType, world), Ownable {
 
+	@JvmField
 	var sizeModifier: Float = 2.0f
 
 	constructor(world: World) : this(ProjectEvaEntities.AT_FIELD, world)
@@ -28,20 +30,22 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
 	@get:JvmName("owner") // Default name conflicts with the getter method from the Ownable interface
 	var owner: ATFieldOwner? = null
 		set(value) {
-			field = value
 			this.ownerUUID = value?.asEntity()?.uuid
-			field?.absoluteTerrorFieldStrength?.also { this.absoluteTerrorFieldStrength = it }
+			this.absoluteTerrorFieldStrength = value?.absoluteTerrorFieldStrength ?: -1
+			field = value
 		}
 
 	var ownerUUID: UUID? = null
 
-	override var absoluteTerrorFieldStrength: Int = -1
+	override var absoluteTerrorFieldStrength: Int
+		get() = this.dataTracker.get(AT_FIELD_STRENGTH)
+		set(value) = this.dataTracker.set(AT_FIELD_STRENGTH, value)
 
 	// TODO: Fix me
 	override fun tick() {
 		super.tick()
 		if (this.world.isClient) return
-		val others = this.world().getOtherEntities(this, this.boundingBox + 1.5 * this.sizeModifier) {
+		val others = this._w.getOtherEntities(this, this.boundingBox + 1.5 * this.sizeModifier) {
 			it != this && !it.isSpectator
 		}
 		if (others.isEmpty()) return
@@ -60,13 +64,13 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
 		}
 	}
 
-	private fun world(): ServerWorld = this.world as ServerWorld
+	private val _w: ServerWorld get() = this.world as ServerWorld
 
 	override fun getOwner(): Entity? = this.owner?.asEntity()
 
-	override fun initDataTracker() {}
+	override fun initDataTracker() = this.dataTracker.startTracking(AT_FIELD_STRENGTH, -1)
 
-	override fun readCustomDataFromNbt(nbt: NbtCompound) = if (KEY in nbt) this.owner = this.world().getEntity(nbt.getUuid(KEY)) else Unit
+	override fun readCustomDataFromNbt(nbt: NbtCompound) = if (KEY in nbt) this.owner = this._w.getEntity(nbt.getUuid(KEY)) else Unit
 
 	override fun writeCustomDataToNbt(nbt: NbtCompound) = if (this.ownerUUID != null) nbt.putUuid(KEY, this.ownerUUID) else Unit
 
@@ -103,6 +107,10 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
 
 	companion object {
 
+		@JvmField
+		val AT_FIELD_STRENGTH: TrackedData<Int> =
+			DataTracker.registerData(ATFieldEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+		@JvmField
 		val AT_FIELD_ID = Identifier(ProjectEva.MOD_ID, "at_field")
 		const val KEY = "OwnerUUID"
 	}
