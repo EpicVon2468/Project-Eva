@@ -30,12 +30,12 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
 		set(value) {
 			field = value
 			this.ownerUUID = value?.asEntity()?.uuid
-			field?.proportionalHealth?.let { this.health = it }
+			field?.ATFieldStrength?.let { this.ATFieldStrength = it }
 		}
 
 	var ownerUUID: UUID? = null
 
-	var health: Int = 20
+	override var ATFieldStrength: Int = -1
 
 	// TODO: Fix me
 	override fun tick() {
@@ -48,7 +48,7 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
 		for (other in others) {
 			if (other !is ATFieldEntity) {
 				if (other is ProjectileEntity) {
-					val item = ((other as? TridentEntity)?.tridentStack?.item as? BaseSpear)
+					val item: BaseSpear? = ((other as? TridentEntity)?.tridentStack?.item as? BaseSpear)
 					if (item !is BaseSpear && other.firstUpdate) other.discard()
 					else item?.let { this.discard() }
 				}
