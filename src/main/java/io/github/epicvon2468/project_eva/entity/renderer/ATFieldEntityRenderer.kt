@@ -17,7 +17,14 @@ class ATFieldEntityRenderer(ctx: EntityRendererFactory.Context) : EntityRenderer
 
 	private val entityModel: ATFieldEntityModel = ATFieldEntityModel(ctx.getPart(ATFieldEntityModel.LAYER_LOCATION))
 
-	override fun render(entity: ATFieldEntity, yaw: Float, tickDelta: Float, matrices: MatrixStack, vertexConsumers: VertexConsumerProvider, light: Int) {
+	override fun render(
+		entity: ATFieldEntity,
+		yaw: Float,
+		tickDelta: Float,
+		matrices: MatrixStack,
+		vertexConsumers: VertexConsumerProvider,
+		light: Int
+	) {
 		super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light)
 		val vertexConsumer = vertexConsumers.getBuffer(this.entityModel.getLayer(this.getTexture(entity)))
 		matrices.push()
@@ -28,5 +35,6 @@ class ATFieldEntityRenderer(ctx: EntityRendererFactory.Context) : EntityRenderer
 		matrices.pop()
 	}
 
-	override fun getTexture(entity: ATFieldEntity): Identifier = Identifier(ProjectEva.MOD_ID, "textures/entity/at_field.png")
+	override fun getTexture(entity: ATFieldEntity): Identifier =
+		Identifier(ProjectEva.MOD_ID, "textures/entity/at_field.png")
 }

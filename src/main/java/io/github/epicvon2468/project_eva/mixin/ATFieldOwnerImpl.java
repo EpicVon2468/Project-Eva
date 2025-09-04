@@ -14,36 +14,36 @@ public class ATFieldOwnerImpl implements ATFieldOwner {
 
 	@Unique
 	@Nullable
-	private ATFieldEntity theATField;
+	private ATFieldEntity absoluteTerrorField;
 
 	@Nullable
 	@Override
-	public ATFieldEntity getATField() {
-		return this.theATField;
+	public ATFieldEntity getAbsoluteTerrorField() {
+		return this.absoluteTerrorField;
 	}
 
 	@Override
-	public void setATField(@Nullable ATFieldEntity atFieldEntity) {
-		this.handleNullableOwner(null);
-		this.theATField = atFieldEntity;
-		this.handleNullableOwner(this);
+	public void setAbsoluteTerrorField(@Nullable ATFieldEntity value) {
+		this.updateOwner(null); // The old AT Field needs to know we're not the owner any more.
+		this.absoluteTerrorField = value;
+		this.updateOwner(this);
 	}
 
 	@Unique
-	private void handleNullableOwner(@Nullable ATFieldOwner newOwner) {
-		if (this.theATField != null) this.theATField.setOwner(newOwner);
+	private void updateOwner(@Nullable ATFieldOwner newOwner) {
+		if (this.absoluteTerrorField != null) this.absoluteTerrorField.setOwner(newOwner);
 	}
 
 	@Override
-	public int getATFieldStrength() {
-		if (this.theATField == null) return -1;
-		return this.theATField.getATFieldStrength();
+	public int getAbsoluteTerrorFieldStrength() {
+		if (this.absoluteTerrorField == null) return -1;
+		return this.absoluteTerrorField.getAbsoluteTerrorFieldStrength();
 	}
 
 	@Override
-	public void setATFieldStrength(int value) {
-		if (this.theATField == null) return;
-		this.theATField.setATFieldStrength(value);
+	public void setAbsoluteTerrorFieldStrength(int value) {
+		if (this.absoluteTerrorField == null) return;
+		this.absoluteTerrorField.setAbsoluteTerrorFieldStrength(value);
 	}
 
 	@NotNull

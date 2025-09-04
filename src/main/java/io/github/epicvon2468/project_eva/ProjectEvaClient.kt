@@ -1,5 +1,7 @@
 package io.github.epicvon2468.project_eva
 
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.rendering.v1.*
 
@@ -7,6 +9,7 @@ import io.github.epicvon2468.project_eva.entity.ProjectEvaEntities
 import io.github.epicvon2468.project_eva.entity.model.ATFieldEntityModel
 import io.github.epicvon2468.project_eva.entity.renderer.ATFieldEntityRenderer
 
+@Environment(EnvType.CLIENT)
 object ProjectEvaClient : ClientModInitializer {
 
 	override fun onInitializeClient() {

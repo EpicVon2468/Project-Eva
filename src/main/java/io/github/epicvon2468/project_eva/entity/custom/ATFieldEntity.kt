@@ -30,12 +30,12 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
 		set(value) {
 			field = value
 			this.ownerUUID = value?.asEntity()?.uuid
-			field?.ATFieldStrength?.let { this.ATFieldStrength = it }
+			field?.absoluteTerrorFieldStrength?.also { this.absoluteTerrorFieldStrength = it }
 		}
 
 	var ownerUUID: UUID? = null
 
-	override var ATFieldStrength: Int = -1
+	override var absoluteTerrorFieldStrength: Int = -1
 
 	// TODO: Fix me
 	override fun tick() {
@@ -50,7 +50,7 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
 				if (other is ProjectileEntity) {
 					val item: BaseSpear? = ((other as? TridentEntity)?.tridentStack?.item as? BaseSpear)
 					if (item !is BaseSpear && other.firstUpdate) other.discard()
-					else item?.let { this.discard() }
+					else item?.also { this.discard() }
 				}
 				continue
 			}
@@ -85,6 +85,8 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
 	override fun hasNoGravity(): Boolean = true
 
 	override fun isImmuneToExplosion(): Boolean = true
+
+	override fun isFireImmune(): Boolean = true
 
 	override fun calculateBoundingBox(): Box {
 		val x = this.x

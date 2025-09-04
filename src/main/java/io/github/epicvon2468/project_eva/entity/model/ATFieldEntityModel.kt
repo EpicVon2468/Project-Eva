@@ -14,10 +14,25 @@ class ATFieldEntityModel(root: ModelPart) : EntityModel<ATFieldEntity>() {
 
 	private val main: ModelPart = root.getChild("main")
 
-	override fun setAngles(entity: ATFieldEntity, limbSwing: Float, limbSwingAmount: Float, ageInTicks: Float, netHeadYaw: Float, headPitch: Float) = Unit
+	override fun setAngles(
+		entity: ATFieldEntity,
+		limbSwing: Float,
+		limbSwingAmount: Float,
+		ageInTicks: Float,
+		netHeadYaw: Float,
+		headPitch: Float
+	) = Unit
 
-	override fun render(matrices: MatrixStack, vertexConsumer: VertexConsumer, light: Int, overlay: Int, red: Float, green: Float, blue: Float, alpha: Float) =
-		main.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha)
+	override fun render(
+		matrices: MatrixStack,
+		vertexConsumer: VertexConsumer,
+		light: Int,
+		overlay: Int,
+		red: Float,
+		green: Float,
+		blue: Float,
+		alpha: Float
+	) = this.main.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha)
 
 	companion object {
 
