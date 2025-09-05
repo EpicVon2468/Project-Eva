@@ -1,54 +1,29 @@
-package io.github.epicvon2468.project_eva.mixin;
+package io.github.epicvon2468.project_eva.mixin
 
-import net.minecraft.entity.Entity;
+import io.github.epicvon2468.project_eva.entity.custom.*
 
-import org.jetbrains.annotations.*;
+import net.minecraft.entity.Entity
 
-import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.*
 
-import io.github.epicvon2468.project_eva.entity.custom.*;
-
-@Mixin(Entity.class)
-@SuppressWarnings("AddedMixinMembersNamePattern")
-public class ATFieldOwnerImpl implements ATFieldOwner {
+@Mixin(Entity::class)
+@Suppress("NonJavaMixin") // You can (not) stop me
+class ATFieldOwnerImpl : ATFieldOwner {
 
 	@Unique
-	@Nullable
-	private ATFieldEntity absoluteTerrorField;
+	override var absoluteTerrorField: ATFieldEntity? = null
+		set(value) {
+			field?.owner = null // The old AT Field needs to know we're not the owner any more.
+			field = value
+			field?.owner = this
+		}
 
-	@Nullable
-	@Override
-	public ATFieldEntity getAbsoluteTerrorField() {
-		return this.absoluteTerrorField;
-	}
+	override var absoluteTerrorFieldStrength: Int
+		get() = this.absoluteTerrorField?.absoluteTerrorFieldStrength ?: -1
+		// How does this compile... I thought assignment wasn't an expression in Kotlin???
+		set(value) = this.absoluteTerrorField?.absoluteTerrorFieldStrength = value
 
-	@Override
-	public void setAbsoluteTerrorField(@Nullable ATFieldEntity value) {
-		this.updateOwner(null); // The old AT Field needs to know we're not the owner any more.
-		this.absoluteTerrorField = value;
-		this.updateOwner(this);
-	}
-
-	@Unique
-	private void updateOwner(@Nullable ATFieldOwner newOwner) {
-		if (this.absoluteTerrorField != null) this.absoluteTerrorField.setOwner(newOwner);
-	}
-
-	@Override
-	public int getAbsoluteTerrorFieldStrength() {
-		if (this.absoluteTerrorField == null) return -1;
-		return this.absoluteTerrorField.getAbsoluteTerrorFieldStrength();
-	}
-
-	@Override
-	public void setAbsoluteTerrorFieldStrength(int value) {
-		if (this.absoluteTerrorField == null) return;
-		this.absoluteTerrorField.setAbsoluteTerrorFieldStrength(value);
-	}
-
-	@NotNull
-	@Override
-	public Entity asEntity() {
-		return (Entity) (Object) this;
-	}
+	// It's not actually going to fail to cast, despite what static analysis thinks
+	@Suppress("KotlinConstantConditions")
+	override fun asEntity(): Entity = (this as Any) as Entity
 }

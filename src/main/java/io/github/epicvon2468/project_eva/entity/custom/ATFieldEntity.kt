@@ -37,6 +37,10 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
 
 	var ownerUUID: UUID? = null
 
+	override var absoluteTerrorField: ATFieldEntity?
+		get() = this
+		set(_) = throw IllegalArgumentException("")
+
 	override var absoluteTerrorFieldStrength: Int
 		get() = this.dataTracker.get(AT_FIELD_STRENGTH)
 		set(value) = this.dataTracker.set(AT_FIELD_STRENGTH, value)
