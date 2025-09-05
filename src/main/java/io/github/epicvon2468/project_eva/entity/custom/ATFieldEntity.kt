@@ -45,14 +45,15 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
 	override fun tick() {
 		super.tick()
 		if (this.world.isClient) return
-		val others = this._w.getOtherEntities(this, this.boundingBox + 1.5 * this.sizeModifier) {
-			it != this && !it.isSpectator
-		}
+		// Use this?
+		//this.boundingBox = this.calculateBoundingBox()
+		val others = this._w.getOtherEntities(this, this.boundingBox + 1.5 * this.sizeModifier) { !it.isSpectator }
 		if (others.isEmpty()) return
 		for (other in others) {
 			if (other !is ATFieldEntity) {
 				if (other is ProjectileEntity) {
 					val item: BaseSpear? = ((other as? TridentEntity)?.tridentStack?.item as? BaseSpear)
+					// Tridents & projectiles pushed against the AT Field can get through... why didn't I document this?
 					if (item !is BaseSpear && other.firstUpdate) other.discard()
 					else item?.also { this.discard() }
 				}
@@ -70,9 +71,11 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
 
 	override fun initDataTracker() = this.dataTracker.startTracking(AT_FIELD_STRENGTH, -1)
 
-	override fun readCustomDataFromNbt(nbt: NbtCompound) = if (KEY in nbt) this.owner = this._w.getEntity(nbt.getUuid(KEY)) else Unit
+	override fun readCustomDataFromNbt(nbt: NbtCompound) =
+		if (KEY in nbt) this.owner = this._w.getEntity(nbt.getUuid(KEY)) else Unit
 
-	override fun writeCustomDataToNbt(nbt: NbtCompound) = if (this.ownerUUID != null) nbt.putUuid(KEY, this.ownerUUID) else Unit
+	override fun writeCustomDataToNbt(nbt: NbtCompound) =
+		if (this.ownerUUID != null) nbt.putUuid(KEY, this.ownerUUID) else Unit
 
 	override fun canBeHitByProjectile(): Boolean = true
 
