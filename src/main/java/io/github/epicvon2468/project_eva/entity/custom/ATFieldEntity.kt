@@ -39,11 +39,13 @@ class ATFieldEntity(entityType: EntityType<out ATFieldEntity>, world: World) : E
 
 	override var absoluteTerrorField: ATFieldEntity?
 		get() = this
-		set(_) = throw IllegalArgumentException("")
+		set(value) = throw IllegalArgumentException(
+			"Attempt was made to reassign the AT Field of an AT Field! AT Field: '$this'; Passed value: '$value'."
+		)
 
 	override var absoluteTerrorFieldStrength: Int
-		get() = this.dataTracker.get(AT_FIELD_STRENGTH)
-		set(value) = this.dataTracker.set(AT_FIELD_STRENGTH, value)
+		get() = this.dataTracker[AT_FIELD_STRENGTH]
+		set(value) { this.dataTracker[AT_FIELD_STRENGTH] = value }
 
 	// TODO: Fix me
 	override fun tick() {

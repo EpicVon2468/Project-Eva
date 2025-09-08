@@ -28,7 +28,7 @@ public class ExplosionMixin {
 		method = "collectBlocksAndDamageEntities"
 	)
 	public boolean protectATFieldOwners(boolean original, @Local Entity entity) {
-		if (entity instanceof ATFieldEntity atFieldEntity) this.protectedEntities.add(atFieldEntity.getOwner());
+		if (entity instanceof ATFieldEntity entity1) return this.protectedEntities.add(entity1.getOwner());
 		if (this.protectedEntities.contains(entity)) return false;
 		else return original;
 	}
