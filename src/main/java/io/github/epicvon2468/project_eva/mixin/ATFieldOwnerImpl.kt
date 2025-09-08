@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.*
 @Suppress("NonJavaMixin") // You can (not) stop me
 class ATFieldOwnerImpl : ATFieldOwner {
 
-	@Unique
 	override var absoluteTerrorField: ATFieldEntity? = null
 		set(value) {
 			field?.owner = null // The old AT Field needs to know we're not the owner any more.
