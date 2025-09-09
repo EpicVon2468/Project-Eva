@@ -9,7 +9,7 @@ import net.minecraft.stat.Stats
 import net.minecraft.util.*
 import net.minecraft.world.World
 
-class BaseSpear : TridentItem(Settings()) {
+open class BaseSpear : TridentItem(Settings()) {
 
 	override fun onStoppedUsing(stack: ItemStack, world: World, user: LivingEntity, remainingUseTicks: Int) {
 		if (user !is PlayerEntity || world.isClient) return

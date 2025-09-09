@@ -16,15 +16,17 @@ object ProjectEvaItems {
 	}
 
 	@JvmField
-	val SPEAR_LONGINUS = this.registerItem("spear_longinus", BaseSpear()).also {
-		UniqueItemRegistry.TRIDENT.addItemToRegistry(it)
-	}
+	val SPEAR_LONGINUS = this.registerSpearItem("spear_longinus", BaseSpear())
 
 	@JvmField
-	val SPEAR_CASSIUS = this.registerItem("spear_cassius", BaseSpear()).also {
-		UniqueItemRegistry.TRIDENT.addItemToRegistry(it)
-	}
+	val SPEAR_CASSIUS = this.registerSpearItem("spear_cassius", BaseSpear())
+
+	@JvmField
+	val SPEAR_GAIUS = this.registerSpearItem("spear_gaius", BaseSpear())
 
 	inline fun <reified T : Item> registerItem(name: String, item: T): T =
 		Registry.register(Registries.ITEM, Identifier(ProjectEva.MOD_ID, name), item)
+
+	inline fun <reified T : BaseSpear> registerSpearItem(name: String, item: T): T =
+		this.registerItem(name, item).also { UniqueItemRegistry.TRIDENT.addItemToRegistry(it) }
 }
